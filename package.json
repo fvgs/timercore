@@ -1,0 +1,27 @@
+{
+	"name": "timercore",
+	"version": "0.0.0",
+	"description": "Precision timer library",
+	"author": "Felipe Vargas <felipe@fvgs.ai> (fvgs.ai)",
+	"repository": "fvgs/timercore",
+	"homepage": "https://github.com/fvgs/timercore",
+	"bugs": "https://github.com/fvgs/timercore/issues",
+	"main": "src/Timer",
+	"license": "MIT",
+	"scripts": {
+		"test": "jest"
+	},
+	"keywords": [
+		"timercore",
+		"time",
+		"timer",
+		"countdown",
+		"core",
+		"precise",
+		"precision",
+		"utility"
+	],
+	"devDependencies": {
+		"jest": "^20.0.4"
+	}
+}

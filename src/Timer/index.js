@@ -8,26 +8,29 @@ const INTERVAL = 1
 class Timer extends EventEmitter {
 	constructor (seconds) {
 		super ()
+
 		this.secondsRemaining = seconds
 		this.residual = 0
 		this.isStarted = false
 		this.startHrtime
 		this.secondsSinceStart
 		this.currentTimeout
+
+		Object.defineProperty(
+			this,
+			'isFinished',
+			{get: () => this.secondsRemaining <= 0},
+		)
 	}
 
 	start () {
-		if (this.isStarted || this.isFinished ()) return
+		if (this.isStarted || this.isFinished) return
 
 		this.startHrtime = hrtime ()
 		const interval = (INTERVAL - this.residual) * MILLISECONDS_PER_SECOND
 		this.timeout (interval)
 		this.isStarted = true
 		this.secondsSinceStart = 0
-	}
-
-	isFinished () {
-		return this.secondsRemaining <= 0
 	}
 
 	timeout (interval) {
@@ -48,7 +51,7 @@ class Timer extends EventEmitter {
 			 */
 			this.secondsRemaining -= INTERVAL
 			this.emit ('tick', this.secondsRemaining)
-			if (this.isFinished ()) {
+			if (this.isFinished) {
 				this.stop ()
 				this.emit ('beep')
 			}
@@ -70,6 +73,7 @@ class Timer extends EventEmitter {
 		if (!this.isStarted) return
 
 		clearTimeout (this.currentTimeout)
+		this.currentTimeout = null
 		this.isStarted = false
 		this.residual += this.getTimeDiff ()
 	}

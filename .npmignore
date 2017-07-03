@@ -1,0 +1,4 @@
+.npmignore
+test.js
+*.test.js
+/jest.config.js

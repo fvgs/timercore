@@ -52,20 +52,31 @@ describe ('timeout', () => {
 		jest.runAllTimers ()
 	})
 
+	test ('Do not tick if instantiated with 0 seconds', () => {
+		const timer = new Timer (0)
+		const tick = jest.fn ()
+		timer.on ('tick', tick)
+		timer.start ()
+		jest.runAllTimers ()
+		expect (tick) . toHaveBeenCalledTimes (0)
+	})
+
 	test ('Emit beep', () => {
+		const timer = new Timer (10)
 		const beep = jest.fn ()
-
-		// Do not beep if instantiated with 0 seconds
-		const t1 = new Timer (0)
-		t1.on ('beep', beep)
-		t1.start ()
-
-		const t2 = new Timer (10)
-		t2.on ('beep', beep)
-		t2.start ()
-
+		timer.on ('beep', beep)
+		timer.start ()
 		jest.runAllTimers ()
 		expect (beep) . toHaveBeenCalledTimes (1)
+	})
+
+	test ('Do not beep if instantiated with 0 seconds', () => {
+		const timer = new Timer (0)
+		const beep = jest.fn ()
+		timer.on ('beep', beep)
+		timer.start ()
+		jest.runAllTimers ()
+		expect (beep) . toHaveBeenCalledTimes (0)
 	})
 
 	test ('tick event listeners do not cause internal state corruption', () => {

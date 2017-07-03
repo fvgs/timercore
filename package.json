@@ -4,7 +4,7 @@
 	"description": "Precision timer library",
 	"author": "Felipe Vargas <felipe@fvgs.ai> (fvgs.ai)",
 	"repository": "fvgs/timercore",
-	"homepage": "https://github.com/fvgs/timercore",
+	"homepage": "https://github.com/fvgs/timercore#readme",
 	"bugs": "https://github.com/fvgs/timercore/issues",
 	"main": "src/Timer",
 	"license": "MIT",

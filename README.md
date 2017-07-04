@@ -1,5 +1,10 @@
 # timercore :hourglass_flowing_sand:
 
+[![npm](https://img.shields.io/npm/v/timercore.svg)](https://www.npmjs.com/package/timercore)
+[![downloads](https://img.shields.io/npm/dt/timercore.svg)](https://www.npmjs.com/package/timercore)
+![tests](https://img.shields.io/badge/tests-passing-brightgreen.svg)
+[![maintained](https://img.shields.io/badge/maintained-%E2%9C%94-brightgreen.svg)](https://github.com/fvgs/timercore)
+
 > Robust, accurate, and precise timer library for Node.js
 
 ## Install

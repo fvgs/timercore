@@ -1,6 +1,6 @@
 {
 	"name": "timercore",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Precision timer library",
 	"author": "Felipe Vargas <felipe@fvgs.ai> (fvgs.ai)",
 	"repository": "fvgs/timercore",

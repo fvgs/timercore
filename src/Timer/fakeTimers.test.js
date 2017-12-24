@@ -121,20 +121,6 @@ describe ('timeout', () => {
 	})
 })
 
-describe ('updateResidual', () => {
-	test ('Residual is always positive', () => {
-		const timer = new Timer (1)
-
-		timer.residual = 0.5
-		timer.updateResidual ()
-		expect (timer.residual) . toEqual (0)
-
-		timer.residual = 1.5
-		timer.updateResidual ()
-		expect (timer.residual) . toBeCloseTo (0.5)
-	})
-})
-
 describe ('getTimeDiff', () => {
 	test ('Time diff is accurate', () => {
 		const seconds = 10

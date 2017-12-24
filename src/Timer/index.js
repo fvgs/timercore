@@ -30,16 +30,15 @@ class Timer extends EventEmitter {
 		const interval = (INTERVAL - this.residual) * MILLISECONDS_PER_SECOND
 		this.timeout (interval)
 		this.isStarted = true
-		this.secondsSinceStart = 0
+		this.secondsSinceStart = -this.residual
+		this.residual = 0
 	}
 
 	timeout (interval) {
 		this.currentTimeout = setTimeout (() => {
-			this.updateResidual ()
 			this.secondsSinceStart += INTERVAL
-			const diff = this.getTimeDiff ()
-			let nextInterval = INTERVAL - diff - this.residual
-			nextInterval *= MILLISECONDS_PER_SECOND
+			const diff = INTERVAL - this.getTimeDiff()
+			const nextInterval = diff * MILLISECONDS_PER_SECOND
 			this.timeout (nextInterval)
 
 			/**
@@ -58,10 +57,6 @@ class Timer extends EventEmitter {
 		}, interval)
 	}
 
-	updateResidual () {
-		this.residual = Math.max (this.residual - INTERVAL, 0)
-	}
-
 	getTimeDiff () {
 		const [seconds, nanoseconds] = hrtime (this.startHrtime)
 		const actualSecondsSinceStart = seconds + (nanoseconds / 1e9)
@@ -75,7 +70,7 @@ class Timer extends EventEmitter {
 		clearTimeout (this.currentTimeout)
 		this.currentTimeout = null
 		this.isStarted = false
-		this.residual += this.getTimeDiff ()
+		this.residual = this.getTimeDiff()
 	}
 }
 

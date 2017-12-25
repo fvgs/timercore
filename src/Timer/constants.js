@@ -1,0 +1,4 @@
+module.exports = {
+	MILLISECOND: 0.001,
+	MILLISECONDS_PER_SECOND: 1000,
+}

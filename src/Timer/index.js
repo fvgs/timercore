@@ -2,7 +2,7 @@ const EventEmitter = require ('events')
 
 const {hrtime} = process
 
-const MILLISECONDS_PER_SECOND = 1000
+const {MILLISECONDS_PER_SECOND} = require('./constants')
 const INTERVAL = 1
 
 class Timer extends EventEmitter {

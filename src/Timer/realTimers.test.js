@@ -1,5 +1,7 @@
 const Timer = require ('./index')
 
+const {MILLISECOND, MILLISECONDS_PER_SECOND} = require('./constants')
+
 const {hrtime} = process
 
 describe ('Timer', () => {
@@ -68,4 +70,52 @@ describe ('Timer', () => {
 
 		expect (beep) . toHaveBeenCalledTimes (1)
 	})
+})
+
+describe.only('getTimeDiff', () => {
+	const seconds = 4
+	const milliseconds = seconds * MILLISECONDS_PER_SECOND
+
+	test('Time diff is non-negative', () =>
+		Promise.all(Array.from({length: milliseconds}, (_, i) =>
+			new Promise((resolve, reject) => {
+				const timer = new Timer(seconds)
+				const realGetTimeDiff = timer.getTimeDiff
+
+				const mockGetTimeDiff = jest.fn(() => {
+					const val = realGetTimeDiff.call(timer)
+
+					try {
+						expect(val + MILLISECOND).toBeGreaterThanOrEqual(0)
+					} catch (error) {
+						reject(error)
+					}
+
+					return val
+				})
+
+				timer.getTimeDiff = mockGetTimeDiff
+
+				timer.on('beep', () => {
+					try {
+						expect(mockGetTimeDiff).toHaveBeenCalled()
+					} catch (error) {
+						reject(error)
+					}
+
+					resolve()
+				})
+
+				timer.start()
+
+				setTimeout(
+					() => {
+						timer.stop()
+						timer.start()
+					},
+					i,
+				)
+			})
+		))
+	)
 })

@@ -1,6 +1,7 @@
 const EventEmitter = require ('events')
 
 const Timer = require ('./index')
+const {MILLISECOND} = require('./constants')
 
 const {hrtime} = process
 
@@ -134,7 +135,7 @@ describe ('getTimeDiff', () => {
 		const [actualSeconds, actualNanoseconds] = hrtime (startTime)
 		const actualTimeDiff = actualSeconds + (actualNanoseconds / 1e9) - seconds
 
-		const secondsPrecision = 0.001
+		const secondsPrecision = MILLISECOND
 		const diff = Math.abs (actualTimeDiff - timeDiff)
 		expect (diff) . toBeLessThanOrEqual (secondsPrecision)
 	})
